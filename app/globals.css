@@ -120,3 +120,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+.hero-image-wrapper {
+  perspective: 700px;
+}
+
+.hero-image{
+  transform: rotateX(15deg) scale(1);
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+}
+
+.hero-image.scrolled{
+  transform: rotate(0deg) scale(1) translateY(40px);
+}
