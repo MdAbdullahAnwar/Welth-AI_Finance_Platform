@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
+import { se } from "date-fns/locale";
 import { revalidatePath } from "next/cache";
 
 const serializeTransaction = (obj) => {
@@ -34,10 +35,10 @@ export async function updateDefaultAccount(accountId) {
     });
 
     const account = await db.account.update({
-      where: { 
+      where: {
         id: accountId,
         userId: user.id,
-     },
+      },
       data: { isDefault: true },
     });
 
@@ -66,11 +67,50 @@ export async function updateDefaultAccount(accountId) {
     // });
 
     // revalidatePath("/dashboard");
-    
+
     // return { success: true };
   } catch (error) {
     return { success: false, error: error.message };
     // console.error("Error updating default account:", error);
     // throw error;
   }
+}
+
+export async function getAccountWithTransactions(accountId) {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  // try {
+  const account = await db.account.findUnique({
+    where: { id: accountId, userId: user.id },
+    include: {
+      transactions: {
+        orderBy: { date: "desc" },
+      },
+      _count: {
+        select: {
+          transactions: true,
+        },
+      },
+    },
+  });
+
+  if (!account) return null;
+
+  return {
+    ...serializeTransaction(account),
+    transactions: account.transactions.map(serializeTransaction),
+  };
+  // } catch (error) {
+  //   console.error(error.message);
+  //   throw error;
+  // }
 }
