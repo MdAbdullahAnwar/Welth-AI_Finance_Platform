@@ -9,7 +9,7 @@ async function DashboardPage() {
 
   const accounts = await getUserAccounts();
 
-  console.log("Accounts fetched:", accounts);
+//   console.log("Accounts fetched:", accounts);
 
   return (
     <div className="px-5">
