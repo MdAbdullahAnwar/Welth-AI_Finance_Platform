@@ -14,6 +14,7 @@
     "@arcjet/next": "^1.0.0-beta.9",
     "@bufbuild/protobuf": "1.5.0",
     "@clerk/nextjs": "^6.24.0",
+    "@google/generative-ai": "^0.24.1",
     "@hookform/resolvers": "^5.1.1",
     "@prisma/client": "^6.11.1",
     "@radix-ui/react-checkbox": "^1.3.2",

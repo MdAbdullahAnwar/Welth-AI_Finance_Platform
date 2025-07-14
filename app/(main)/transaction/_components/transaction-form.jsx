@@ -27,6 +27,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import ReceiptScanner from "./recipt-scanner";
 
 const AddTransactionForm = ({ accounts, categories }) => {
   const router = useRouter();
@@ -67,12 +68,12 @@ const AddTransactionForm = ({ accounts, categories }) => {
   };
 
   useEffect(() => {
-    if(transactionResult?.success && !transactionLoading){
-        toast.success("Transaction created successfully");
-        reset();
-        router.push(`/account/${transactionResult.data.accountId}`);
+    if (transactionResult?.success && !transactionLoading) {
+      toast.success("Transaction created successfully");
+      reset();
+      router.push(`/account/${transactionResult.data.accountId}`);
     }
-  },[transactionResult, transactionLoading]);
+  }, [transactionResult, transactionLoading]);
 
   //     if (editMode) {
   //       transactionFn(editId, formData);
@@ -89,8 +90,25 @@ const AddTransactionForm = ({ accounts, categories }) => {
     (category) => category.type === type
   );
 
+  const handleScanComplete = (scannedData) => {
+    if (scannedData) {
+      setValue("amount", scannedData.amount.toString());
+      setValue("date", new Date(scannedData.date));
+      if (scannedData.description) {
+        setValue("description", scannedData.description);
+      }
+      if (scannedData.category) {
+        setValue("category", scannedData.category);
+      }
+      toast.success("Receipt scanned successfully");
+    }
+  };
+
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+      {/* Receipt Scanner - Only show in create mode */}
+      <ReceiptScanner onScanComplete={handleScanComplete} />
+
       {/* Type */}
       <div className="space-y-2">
         <label className="text-sm font-medium">Type</label>
@@ -277,11 +295,7 @@ const AddTransactionForm = ({ accounts, categories }) => {
         >
           Cancel
         </Button>
-        <Button 
-            type="submit" 
-            className="flex-1" 
-            disabled={transactionLoading}
-        >
+        <Button type="submit" className="flex-1" disabled={transactionLoading}>
           Create Transaction
         </Button>
       </div>
