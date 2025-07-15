@@ -8,7 +8,8 @@
     "email:export": "email export",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@arcjet/next": "^1.0.0-beta.9",
