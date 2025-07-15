@@ -42,7 +42,7 @@ const HeroSection = () => {
               Get Started
             </Button>
           </Link>
-          <Link href="https://www.youtube.com">
+          <Link href="https://github.com/MdAbdullahAnwar/Welth-AI_Finance_Platform.git">
             <Button size="lg" variant="outline" className="px-8">
               Watch Demo
             </Button>
