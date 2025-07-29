@@ -42,7 +42,7 @@ const HeroSection = () => {
               Get Started
             </Button>
           </Link>
-          <Link href="https://github.com/MdAbdullahAnwar/Welth-AI_Finance_Platform.git">
+          <Link href="https://drive.google.com/file/d/1ftbHnPXY5i3TCCbdFgA1rD5dbumFilxc/view?usp=drivesdk">
             <Button size="lg" variant="outline" className="px-8">
               Watch Demo
             </Button>

@@ -10,6 +10,8 @@ Check out the working version of this project in action! Explore the features an
 
 🚀 [**Try the Live Demo on Vercel →**](https://welth-ai-finance-platform-pi.vercel.app/)
 
+📽️ [**Watch Demo Video**](https://drive.google.com/file/d/1ftbHnPXY5i3TCCbdFgA1rD5dbumFilxc/view?usp=drivesdk)
+
 ---
 
 ## 🚀 Features
